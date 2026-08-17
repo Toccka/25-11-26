@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dana Party Invite</title>
+    <meta
+      name="description"
+      content="Dana Party am 25.11. ab 19:00 im Lidolino, Berlin."
+    />
+    <link rel="canonical" href="https://toccka.github.io/dana-party-final/invite.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Dana Party" />
+    <meta property="og:title" content="BIGMOUTH STRIKES AGAIN" />
+    <meta
+      property="og:description"
+      content="Dana Party am 25.11. ab 19:00 im Lidolino, Berlin."
+    />
+    <meta
+      property="og:url"
+      content="https://toccka.github.io/dana-party-final/invite.html"
+    />
+    <meta
+      property="og:image"
+      content="https://toccka.github.io/dana-party-final/assets/images/og-cover.png?v=3"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BIGMOUTH STRIKES AGAIN" />
+    <meta
+      name="twitter:description"
+      content="Dana Party am 25.11. ab 19:00 im Lidolino, Berlin."
+    />
+    <meta
+      name="twitter:image"
+      content="https://toccka.github.io/dana-party-final/assets/images/og-cover.png?v=3"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <audio
+      id="bg-audio"
+      loop
+      playsinline
+      webkit-playsinline
+      preload="auto"
+      aria-hidden="true"
+    >
+      <source
+        src="./assets/audio/bigmouth-strikes-again.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <div class="desktop-frame">
+      <main class="invite-shell">
+        <section class="panel hero-panel" id="hero">
+          <div class="panel-face face-left" aria-hidden="true"></div>
+          <img
+            class="hero-face-image"
+            src="./assets/images/face-final-v2.png"
+            alt=""
+            aria-hidden="true"
+          />
+          <div class="panel-copy hero-copy">
+            <div class="hero-meta-row">
+              <p class="hero-meta hero-date martian-mono">25.11.</p>
+              <p class="hero-meta hero-time martian-mono">AB 19:00</p>
+            </div>
+            <div class="hero-stage">
+              <h1 class="hero-title">
+                <span>BIGMOUTH</span>
+                <span class="editorial">STRIKES</span>
+                <span>AGAIN</span>
+              </h1>
+              <p class="hero-note hero-note-primary editorial">
+                <span class="hero-note-line hero-note-line-first">ES&nbsp;WIRD&nbsp;WAVY,</span>
+                <span class="hero-note-line">PUNKIG,</span>
+                <span class="hero-note-line">UND EIN</span>
+                <span class="hero-note-line">BISSCHEN</span>
+                <span class="hero-note-line">GUILTY</span>
+              </p>
+              <p class="hero-note hero-note-secondary editorial">
+                <span class="hero-note-line">FIRST SET</span>
+                <span class="hero-note-line">21:00</span>
+              </p>
+              <button
+                class="music-trigger"
+                id="music-trigger"
+                type="button"
+                aria-label="Musik starten"
+                aria-pressed="false"
+              >
+                <svg
+                  class="music-trigger__icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"
+                  />
+                  <path
+                    d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="hero-meta-row">
+              <p class="hero-meta hero-location martian-mono">LIDOLINO</p>
+              <p class="hero-meta hero-city martian-mono">BERLIN</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script>
+      const bgAudio = document.getElementById("bg-audio");
+      const musicTrigger = document.getElementById("music-trigger");
+
+      if (bgAudio && musicTrigger) {
+        bgAudio.volume = 0.28;
+        let audioContext;
+
+        const setMusicState = (isPlaying) => {
+          musicTrigger.classList.toggle("is-active", isPlaying);
+          musicTrigger.setAttribute("aria-pressed", String(isPlaying));
+        };
+
+        const toggleAudio = async () => {
+          try {
+            if (!audioContext) {
+              const AudioContextClass =
+                window.AudioContext || window.webkitAudioContext;
+
+              if (AudioContextClass) {
+                audioContext = new AudioContextClass();
+              }
+            }
+
+            if (audioContext && audioContext.state === "suspended") {
+              await audioContext.resume();
+            }
+
+            if (!bgAudio.paused) {
+              bgAudio.pause();
+              setMusicState(false);
+              return;
+            }
+
+            await bgAudio.play();
+            setMusicState(true);
+          } catch (error) {
+            setMusicState(false);
+          }
+        };
+
+        bgAudio.addEventListener("play", () => setMusicState(true));
+        bgAudio.addEventListener("pause", () => setMusicState(false));
+        musicTrigger.addEventListener("click", toggleAudio);
+        setMusicState(false);
+      }
+    </script>
+  </body>
+</html>
