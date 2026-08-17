@@ -353,6 +353,9 @@ img {
   position: absolute;
   left: 50%;
   top: var(--music-top-title);
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
   width: clamp(2.8rem, 10.5vw, 3.35rem);
   height: clamp(2.8rem, 10.5vw, 3.35rem);
   border: 1.6px solid rgba(5, 5, 5, 0.92);
@@ -372,10 +375,15 @@ img {
     color 180ms ease;
 }
 
-.music-trigger:hover,
+.music-trigger:focus,
 .music-trigger:focus-visible {
-  background: rgba(255, 255, 255, 0.18);
   outline: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .music-trigger:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
 }
 
 .music-trigger:active {
