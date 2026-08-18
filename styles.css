@@ -52,7 +52,7 @@
   --orange: #ff4a16;
   --cream: #f4e7d9;
   --ink: #050505;
-  --cycle-duration: 11s;
+  --cycle-duration: 12.5s;
   --shell-width: min(100vw, 430px);
   --shell-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 22px 60px rgba(0, 0, 0, 0.65);
   --martian-wght: 400;
@@ -455,12 +455,12 @@ img {
   }
 
   12%,
-  31% {
+  26% {
     opacity: 1;
     transform: translateY(0);
   }
 
-  37%,
+  36%,
   100% {
     opacity: 0;
     transform: translateY(-0.45rem);
@@ -495,7 +495,7 @@ img {
   }
 
   86%,
-  88% {
+  92% {
     opacity: 1;
     transform: translateY(0);
   }
